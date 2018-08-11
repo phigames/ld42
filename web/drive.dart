@@ -95,6 +95,8 @@ class Drive extends Sprite {
     bar.graphics.beginPath();
     bar.graphics.rect(0, BAR_HEIGHT, area.width * used / size, -10);
     bar.graphics.fillColor(0xFFAA4444);
+    print('DRIVE UPDATED:');
+    print(files);
   }
 
 }

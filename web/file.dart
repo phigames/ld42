@@ -55,6 +55,11 @@ class File extends Sprite {
     drawIcon();
   }
 
+  @override
+  String toString() {
+    return 'FILE: ' + name;
+  }
+
 }
 
 class ZipFile extends File {
@@ -75,6 +80,11 @@ class ZipFile extends File {
       size += f.size;
     }
     return size;
+  }
+
+  @override
+  String toString() {
+    return 'ZIPFILE: ' + name + ' (' + files.toString() + ')';
   }
 
 }
