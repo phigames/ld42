@@ -13,46 +13,49 @@ class File extends Sprite {
   num size;
   Drive drive;
   bool selected;
+  Bitmap icon;
+  TextField text;
 
   File(this.name, this.type, this.size) {
-    addChild(
-      new TextField(name, new TextFormat(FONT, 15, 0xFF000000, align: 'center'))
-        ..y = 50
-        ..width = 50
-        ..height = 20
-        ..mouseEnabled = false
-    );
-    addChild(
-      new TextField(size.toString() + 'kB', new TextFormat(FONT, 15, 0xFF000000, align: 'center'))
-        ..y = 65
-        ..width = 50
-        ..height = 20
-        ..mouseEnabled = false
-    );
     mouseCursor = MouseCursor.POINTER;
     selected = false;
-    drawIcon();
+    icon = new Bitmap();
+    addChild(icon);
+    text = new TextField('${name}\n${sizeString(size)}', new TextFormat(FONT, 15, 0xFF000000, align: 'left'))
+      ..x = 55
+      ..y = 5
+      ..width = 95
+      ..height = 40
+      ..mouseEnabled = false;
+    addChild(text);
+    updateIcon();
   }
 
-  void drawIcon() {
-    graphics.clear();
-    graphics.beginPath();
-    graphics.rect(0, 0, 50, 50);
+  void updateIcon() {
     if (type == FileType.TEXT) {
-      graphics.fillColor(selected ? 0xFF880000 : 0xFFFF0000);
-    } else {
-      graphics.fillColor(selected ? 0xFF008800 : 0xFF00FF00);
+      icon.bitmapData = resourceManager.getBitmapData('text');
+    } else if (type == FileType.IMAGE) {
+      icon.bitmapData = resourceManager.getBitmapData('image');
+    } else if (type == FileType.ZIP) {
+      icon.bitmapData = resourceManager.getBitmapData('zip');
     }
+    if (!selected) {
+      text.defaultTextFormat = new TextFormat(FONT, 15, 0xFF000000, align: 'left');
+    } else {
+      text.defaultTextFormat = new TextFormat(FONT, 15, 0xFF000000, align: 'left', bold: true, underline: true);
+    }
+    icon.width = 50;
+    icon.height = 50;
   }
 
   void select() {
     selected = true;
-    drawIcon();
+    updateIcon();
   }
 
   void deselect() {
     selected = false;
-    drawIcon();
+    updateIcon();
   }
 
   @override

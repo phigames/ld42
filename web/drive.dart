@@ -20,7 +20,7 @@ class Drive extends Sprite {
     this.y = y;
     area = new Sprite();
     area.graphics.beginPath();
-    area.graphics.rect(0, 0, 300, 300);
+    area.graphics.rect(0, 0, 330, 250);
     area.graphics.fillColor(0xFFDDDDDD);
     addChild(area);
     bar = new Sprite();
@@ -81,20 +81,20 @@ class Drive extends Sprite {
       f.drive = this;
       f.x = x + fileX;
       f.y = y + fileY;
-      fileX += 60;
-      if (fileX > area.width - 60) {
+      fileX += 160;
+      if (fileX > area.width - 160) {
         fileX = 10;
-        fileY += 90;
+        fileY += 60;
       }
       used += f.size;
     }
-    sizeText.text = used.toString() + '/' + size.toString() + 'kB';
+    sizeText.text = '${sizeString(used)}/${sizeString(size)}';
     if (redraw) {
       bar.graphics.beginPath();
       bar.graphics.rect(0, 0, area.width, BAR_HEIGHT);
       bar.graphics.fillColor(0xFF4444FF);
       bar.graphics.beginPath();
-      bar.graphics.rect(0, BAR_HEIGHT, area.width * used / size, -10);
+      bar.graphics.rect(0, BAR_HEIGHT, area.width * used / size, -BAR_HEIGHT);//-10);
       bar.graphics.fillColor(0xFFAA4444);
     }
   }

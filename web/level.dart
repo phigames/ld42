@@ -1,5 +1,13 @@
 part of ld42;
 
+String sizeString(num size) {
+  if (size < 1024) {
+    return '${size.toStringAsPrecision(3)}kB';
+  } else {
+    return '${(size/1024).toStringAsPrecision(3)}MB';
+  }
+}
+
 class Level extends Sprite {
 
   List<Drive> drives;

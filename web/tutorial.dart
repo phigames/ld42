@@ -51,7 +51,7 @@ class Tutorial extends Sprite {
     if (actionStrings.containsKey(action)) {
       hide();
       balloon.addChild(
-        new TextField(actionStrings[action], new TextFormat(FONT, 20, 0xFF000000))
+        new TextField(actionStrings[action], new TextFormat(FONT, 15, 0xFF000000))
           ..x = 10
           ..y = 10
           ..width = 280

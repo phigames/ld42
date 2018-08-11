@@ -6,7 +6,7 @@ class Levels {
     <Drive>[
       new Drive(
         'Hard Disk',
-        50, 50,
+        50, 200,
         128,
         <File>[
           new File('kittens.jpg', FileType.IMAGE, 6.7),
@@ -15,8 +15,8 @@ class Levels {
         ]
       ),
       new Drive(
-        'USB Drive',
-        400, 200,
+        'USB Drive 1',
+        400, 80,
         8,
         <File>[
         ],
@@ -34,7 +34,7 @@ class Levels {
     <Drive>[
       new Drive(
         'Hard Disk',
-        50, 50,
+        50, 200,
         128,
         <File>[
           new File('kittens.jpg', FileType.IMAGE, 6.7),
@@ -43,8 +43,8 @@ class Levels {
         ]
       ),
       new Drive(
-        'USB Drive',
-        400, 200,
+        'USB Drive 2',
+        400, 80,
         8,
         <File>[
           new File('harold.gif', FileType.IMAGE, 7.2),

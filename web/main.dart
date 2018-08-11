@@ -2,6 +2,7 @@ library ld42;
 
 import 'dart:async';
 import 'dart:html' as html;
+import 'dart:math' as math;
 import 'package:stagexl/stagexl.dart';
 
 part 'level.dart';
@@ -10,9 +11,10 @@ part 'drive.dart';
 part 'file.dart';
 part 'tutorial.dart';
 
-const String FONT = 'Times New Roman';
+const String FONT = 'Share Tech Mono';
 
 Stage stage;
+ResourceManager resourceManager;
 List<Level> levels;
 int currentLevel;
 
@@ -27,8 +29,12 @@ Future<Null> main() async {
   RenderLoop renderLoop = new RenderLoop();
   renderLoop.addStage(stage);
 
-  ResourceManager resourceManager = new ResourceManager();
-  //resourceManager.addBitmapData("dart", "images/dart@1x.png");
+  resourceManager = new ResourceManager();
+  resourceManager.addBitmapData('text', 'res/text.png');
+  resourceManager.addBitmapData('image', 'res/image.png');
+  resourceManager.addBitmapData('zip', 'res/zip.png');
+  resourceManager.addBitmapData('stapler1', 'res/stapler1.png');
+  resourceManager.addBitmapData('stapler2', 'res/stapler2.png');
 
   await resourceManager.load();
 
