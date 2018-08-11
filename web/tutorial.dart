@@ -33,7 +33,7 @@ class Tutorial extends Sprite {
     button.graphics.fillColor(0xFFFFFFAA);
     button.graphics.strokeColor(0xFF000000);
     button.addChild(
-      new TextField('OK', new TextFormat('sans-serif', 15, 0xFF000000, align: 'center'))
+      new TextField('OK', new TextFormat(FONT, 15, 0xFF000000, align: 'center'))
         ..x = 5
         ..y = 5
         ..width = 90
@@ -51,7 +51,7 @@ class Tutorial extends Sprite {
     if (actionStrings.containsKey(action)) {
       hide();
       balloon.addChild(
-        new TextField(actionStrings[action], new TextFormat('sans-serif', 20, 0xFF000000))
+        new TextField(actionStrings[action], new TextFormat(FONT, 20, 0xFF000000))
           ..x = 10
           ..y = 10
           ..width = 280

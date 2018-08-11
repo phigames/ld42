@@ -4,7 +4,6 @@ class Level extends Sprite {
 
   List<Drive> drives;
   Drive selectionDrive;
-  List<File> selectedFiles;
   int zipNumber;
   Tutorial tutorial;
 
@@ -17,7 +16,7 @@ class Level extends Sprite {
       d.bar.onMouseUp.listen((_) => _stopDriveDrag(d));
       d.bar.onMouseOut.listen((_) => _stopDriveDrag(d));
       d.bar.onMouseMove.listen((_) {
-        if (d.dragging) d.update();
+        if (d.dragging) d.update(redraw: false);
       });
       addChild(d);
       for (File f in d.files) {
@@ -32,7 +31,6 @@ class Level extends Sprite {
         addChild(f);
       }
     }
-    selectedFiles = new List<File>();
     zipNumber = 0;
     if (tutorial != null) {
       addChild(tutorial);
@@ -45,12 +43,10 @@ class Level extends Sprite {
       for (File f in selectionDrive.files) {
         f.deselect();
       }
-      selectedFiles.clear();
     }
   }
 
   void addFile(Drive drive, File file, bool brandnew) {
-    print('adding ' + file.name);
     drive.files.add(file);
     if (brandnew) {
       file.onTouchBegin.listen((_) => _startFileDrag(file));
@@ -61,19 +57,18 @@ class Level extends Sprite {
       //file.onMouseOut.listen((_) => _stopFileDrag(file));
       file.onTouchTap.listen((_) => _toggleFileSelection(file));
       file.onMouseRightClick.listen((_) => _toggleFileSelection(file));
-      addChild(file);
     } else {
-      file.visible = true;
+      //file.visible = true;
     }
-    drive.update(true);
+      addChild(file);
+    drive.update(sort: true);
   }
 
   void removeFile(File file) {
-    print('removing ' + file.name);
     file.drive.files.remove(file);
-    //removeChild(file);
-    file.visible = false;
-    file.drive.update(false);
+    removeChild(file);
+    //file.visible = false;
+    file.drive.update();
   }
 
   void checkLevelOver() {
@@ -124,42 +119,41 @@ class Level extends Sprite {
     }
     if (file.selected) {
       file.deselect();
-      file.drive.update();
-      selectedFiles.remove(file);
-      file.drive.update();
     } else {
       file.select();
       selectionDrive = file.drive;
-      selectedFiles.add(file);
     }
   }
 
   void _onKeyPressed(int keyCode) {
     if (keyCode == html.KeyCode.Z) {
+      List<File> selectedFiles = new List<File>();
+      for (Drive d in drives) {
+        for (File f in d.files) {
+          if (f.selected) {
+            selectedFiles.add(f);
+          }
+        }
+      }
       // unzip single zip file
-      if (selectedFiles.length == 1 && selectedFiles[0].type == FileType.ZIP) {
+      if (selectedFiles.length == 1 && selectedFiles[0] is ZipFile) {
         ZipFile zip = selectedFiles[0] as ZipFile;
         if (zip.drive.used - zip.size + zip.originalSize > zip.drive.size) {
           print('cannot unpack');
         } else {
-          print('unzip');
-          print((zip.files[0] as ZipFile).files);
+          removeFile(zip);
           for (File f in zip.files) {
             addFile(zip.drive, f, false);
           }
-          removeFile(zip);
         }
       }
       // zip multiple or single regular files
       else {
-        print('zip');
-        print(selectedFiles);
-        ZipFile zip = new ZipFile(zipNumber++, selectedFiles);
-        print(zip.files);
-        addFile(selectionDrive, zip, true);
         for (File f in selectedFiles) {
           removeFile(f);
         }
+        ZipFile zip = new ZipFile(zipNumber++, selectedFiles);
+        addFile(selectionDrive, zip, true);
       }
       deselectAll();
     }

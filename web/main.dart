@@ -10,13 +10,15 @@ part 'drive.dart';
 part 'file.dart';
 part 'tutorial.dart';
 
+const String FONT = 'Times New Roman';
+
 Stage stage;
 List<Level> levels;
 int currentLevel;
 
 Future<Null> main() async {
   StageOptions options = new StageOptions()
-    ..backgroundColor = Color.White
+    ..backgroundColor = 0xFF000022
     ..renderEngine = RenderEngine.Canvas2D;
 
   html.CanvasElement canvas = html.querySelector('#stage');

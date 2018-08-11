@@ -25,19 +25,19 @@ class Drive extends Sprite {
     addChild(area);
     bar = new Sprite();
     bar.y = -BAR_HEIGHT;
-    nameText = new TextField(name, new TextFormat('sans-serif', 20, 0xFFFFFFFF))
+    nameText = new TextField(name, new TextFormat(FONT, 20, 0xFFFFFFFF))
         ..x = 5
         ..width = area.width - 10
         ..height = BAR_HEIGHT
         ..mouseEnabled = false;
     bar.addChild(nameText);
-    sizeText = new TextField('', new TextFormat('sans-serif', 20, 0xFFFFFFFF, align: 'right'))
+    sizeText = new TextField('', new TextFormat(FONT, 20, 0xFFFFFFFF, align: 'right'))
         ..x = 5
         ..width = area.width - 10
         ..height = BAR_HEIGHT
         ..mouseEnabled = false;
     bar.addChild(sizeText);
-    update(true);
+    update(sort: true);
     bar.mouseCursor = MouseCursor.POINTER;
     addChild(bar);
     dragging = false;
@@ -50,7 +50,7 @@ class Drive extends Sprite {
     file.drive.files.remove(file);
     file.drive.update();
     files.add(file);
-    update(true);
+    update(sort: true);
     return true;
   }
 
@@ -70,7 +70,7 @@ class Drive extends Sprite {
     return true;
   }
 
-  void update([bool sort = false]) {
+  void update({bool sort = false, bool redraw = true}) {
     if (sort) {
       files.sort((f1, f2) => f1.name.compareTo(f2.name));
     }
@@ -89,14 +89,14 @@ class Drive extends Sprite {
       used += f.size;
     }
     sizeText.text = used.toString() + '/' + size.toString() + 'kB';
-    bar.graphics.beginPath();
-    bar.graphics.rect(0, 0, area.width, BAR_HEIGHT);
-    bar.graphics.fillColor(0xFF4444FF);
-    bar.graphics.beginPath();
-    bar.graphics.rect(0, BAR_HEIGHT, area.width * used / size, -10);
-    bar.graphics.fillColor(0xFFAA4444);
-    print('DRIVE UPDATED:');
-    print(files);
+    if (redraw) {
+      bar.graphics.beginPath();
+      bar.graphics.rect(0, 0, area.width, BAR_HEIGHT);
+      bar.graphics.fillColor(0xFF4444FF);
+      bar.graphics.beginPath();
+      bar.graphics.rect(0, BAR_HEIGHT, area.width * used / size, -10);
+      bar.graphics.fillColor(0xFFAA4444);
+    }
   }
 
 }

@@ -16,14 +16,14 @@ class File extends Sprite {
 
   File(this.name, this.type, this.size) {
     addChild(
-      new TextField(name, new TextFormat('sans-serif', 15, 0xFF000000, align: 'center'))
+      new TextField(name, new TextFormat(FONT, 15, 0xFF000000, align: 'center'))
         ..y = 50
         ..width = 50
         ..height = 20
         ..mouseEnabled = false
     );
     addChild(
-      new TextField(size.toString() + 'kB', new TextFormat('sans-serif', 15, 0xFF000000, align: 'center'))
+      new TextField(size.toString() + 'kB', new TextFormat(FONT, 15, 0xFF000000, align: 'center'))
         ..y = 65
         ..width = 50
         ..height = 20
@@ -64,6 +64,12 @@ class File extends Sprite {
 
 class ZipFile extends File {
 
+  static const Map<FileType, num> COMPRESSION = <FileType, num>{
+    FileType.TEXT: 0.3,
+    FileType.IMAGE: 0.9,
+    FileType.ZIP: 0,
+  };
+
   List<File> files;
   num originalSize;
 
@@ -77,7 +83,7 @@ class ZipFile extends File {
   static num calculateSize(List<File> files) {
     num size = 0;
     for (File f in files) {
-      size += f.size;
+      size += f.size * COMPRESSION[f.type];
     }
     return size;
   }
