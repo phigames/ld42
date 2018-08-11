@@ -36,16 +36,21 @@ Future<Null> main() async {
   ];
   currentLevel = 0;
   stage.addChild(levels[currentLevel]);
+  html.document.onKeyUp.listen(_onKeyPressed);
 }
 
 void nextLevel() {
-  print('next');
+  stage.removeChildren();
   currentLevel++;
   if (currentLevel >= levels.length) {
     gameOver();
   } else {
     stage.addChild(levels[currentLevel]);
   }
+}
+
+void _onKeyPressed(html.KeyboardEvent event) {
+  levels[currentLevel]._onKeyPressed(event.keyCode);
 }
 
 void gameOver() {

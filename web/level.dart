@@ -3,6 +3,8 @@ part of ld42;
 class Level extends Sprite {
 
   List<Drive> drives;
+  Drive selectionDrive;
+  List<File> selectedFiles;
   Tutorial tutorial;
 
   Level(this.drives, this.tutorial) {
@@ -24,13 +26,25 @@ class Level extends Sprite {
         f.onMouseDown.listen((_) => _startFileDrag(f));
         f.onMouseUp.listen((_) => _stopFileDrag(f));
         f.onMouseOut.listen((_) => _stopFileDrag(f));
+        f.onTouchTap.listen((_) => _toggleFileSelection(f));
+        f.onMouseRightClick.listen((_) => _toggleFileSelection(f));
         addChild(f);
       }
     }
+    selectedFiles = new List<File>();
     if (tutorial != null) {
       addChild(tutorial);
     }
     tutorial.handleAction(Action.BEGIN);
+  }
+
+  void deselectAll() {
+    if (selectionDrive != null) {
+      for (File f in selectionDrive.files) {
+        f.deselect();
+      }
+      selectedFiles.clear();
+    }
   }
 
   void checkLevelOver() {
@@ -46,6 +60,7 @@ class Level extends Sprite {
     file.startDrag(false);
     file.alpha = 0.5;
     setChildIndex(file, children.length - 1);
+    deselectAll();
   }
 
   void _stopFileDrag(File file) {
@@ -72,6 +87,35 @@ class Level extends Sprite {
   void _stopDriveDrag(Drive drive) {
     drive.dragging = false;
     drive.stopDrag();
+  }
+
+  void _toggleFileSelection(File file) {
+    if (selectionDrive != null && selectionDrive != file.drive) {
+      deselectAll();
+    }
+    if (file.selected) {
+      file.deselect();
+      selectedFiles.remove(file);
+    } else {
+      file.select();
+      selectionDrive = file.drive;
+      selectedFiles.add(file);
+    }
+  }
+
+  void _onKeyPressed(int keyCode) {
+    if (keyCode == html.KeyCode.Z) {
+      if (selectedFiles.length == 1 && selectedFiles[0] is ZipFile) {
+        ZipFile zip = selectedFiles[0] as ZipFile;
+        if (zip.drive.used - zip.size + zip.originalSize > zip.drive.size) {
+          print('cannot unpack');
+        } else {
+          zip.drive.files.remove(zip);
+          zip.drive.files.addAll(zip.files);
+          zip.drive.update(true);
+        }
+      }
+    }
   }
 
 }
