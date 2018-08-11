@@ -5,25 +5,49 @@ import 'dart:html' as html;
 import 'package:stagexl/stagexl.dart';
 
 part 'level.dart';
+part 'levels.dart';
 part 'drive.dart';
 part 'file.dart';
+part 'tutorial.dart';
+
+Stage stage;
+List<Level> levels;
+int currentLevel;
 
 Future<Null> main() async {
   StageOptions options = new StageOptions()
     ..backgroundColor = Color.White
     ..renderEngine = RenderEngine.Canvas2D;
 
-  var canvas = html.querySelector('#stage');
-  var stage = new Stage(canvas, width: 800, height: 600, options: options);
+  html.CanvasElement canvas = html.querySelector('#stage');
+  stage = new Stage(canvas, width: 800, height: 600, options: options);
 
-  var renderLoop = new RenderLoop();
+  RenderLoop renderLoop = new RenderLoop();
   renderLoop.addStage(stage);
 
-  var resourceManager = new ResourceManager();
+  ResourceManager resourceManager = new ResourceManager();
   //resourceManager.addBitmapData("dart", "images/dart@1x.png");
 
   await resourceManager.load();
 
-  Level level = Level.LEVEL_TEST;
-  stage.addChild(level);
+  levels = <Level>[
+    Levels.TUTORIAL1,
+    Levels.TUTORIAL2,
+  ];
+  currentLevel = 0;
+  stage.addChild(levels[currentLevel]);
+}
+
+void nextLevel() {
+  print('next');
+  currentLevel++;
+  if (currentLevel >= levels.length) {
+    gameOver();
+  } else {
+    stage.addChild(levels[currentLevel]);
+  }
+}
+
+void gameOver() {
+  print('game over');
 }

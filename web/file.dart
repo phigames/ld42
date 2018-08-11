@@ -20,12 +20,14 @@ class File extends Sprite {
         ..y = 50
         ..width = 50
         ..height = 20
+        ..mouseEnabled = false
     );
     addChild(
       new TextField(size.toString() + 'kB', new TextFormat('sans-serif', 15, 0xFF000000, align: 'center'))
         ..y = 65
         ..width = 50
         ..height = 20
+        ..mouseEnabled = false
     );
     mouseCursor = MouseCursor.POINTER;
   }
