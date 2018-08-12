@@ -43,6 +43,9 @@ class Level extends Sprite {
     if (tutorial != null) {
       addChild(tutorial);
     }
+  }
+
+  void start() {
     tutorial.handleAction(Action.BEGIN);
   }
 
@@ -93,12 +96,18 @@ class Level extends Sprite {
     file.alpha = 0.5;
     setChildIndex(file, children.length - 1);
     deselectAll();
+    //resourceManager.getSound('click').play();
   }
 
   void _stopFileDrag(File file) {
     bool moved = false;
     for (Drive d in drives) {
       if (file.hitTestObject(d)) {
+        if (d == file.drive) {
+          moved = true;
+          file.drive.update();
+          break;
+        }
         moved = d.moveHere(file);
         if (moved) {
           break;
@@ -107,12 +116,14 @@ class Level extends Sprite {
     }
     if (!moved) {
       file.drive.update();
-      print('cannot move');
+      file.highlight(0xFFAA4444);
+      resourceManager.getSound('error').play();
     } else {
       checkLevelOver();
     }
     file.stopDrag();
     file.alpha = 1;
+    resourceManager.getSound('click').play();
   }
 
   void _startDriveDrag(Drive drive) {
@@ -132,9 +143,11 @@ class Level extends Sprite {
     }
     if (file.selected) {
       file.deselect();
+      resourceManager.getSound('click').play();
     } else {
       file.select();
       selectionDrive = file.drive;
+      resourceManager.getSound('click').play();
     }
   }
 
@@ -152,14 +165,16 @@ class Level extends Sprite {
       if (selectedFiles.length == 1 && selectedFiles[0] is ZipFile) {
         ZipFile zip = selectedFiles[0] as ZipFile;
         if (zip.drive.used - zip.size + zip.originalSize > zip.drive.size) {
-          print('cannot unpack');
+          zip.highlight(0xFFAA4444);
+          resourceManager.getSound('error').play();
         } else {
           removeFile(zip);
           for (File f in zip.files) {
             addFile(zip.drive, f, false);
-            f.highlight();
+            f.highlight(0xFF4444FF);
           }
           checkLevelOver();
+          resourceManager.getSound('zip').play();
         }
       }
       // zip multiple or single regular files
@@ -169,8 +184,9 @@ class Level extends Sprite {
         }
         ZipFile zip = new ZipFile(zipNumber++, selectedFiles);
         addFile(selectionDrive, zip, true);
-        zip.highlight();
+        zip.highlight(0xFF4444FF);
         tutorial.handleAction(Action.ZIP);
+        resourceManager.getSound('zip').play();
       }
       deselectAll();
     }

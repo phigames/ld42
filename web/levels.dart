@@ -5,7 +5,7 @@ class Levels {
   static final Level TUTORIAL1 = new Level(
     <Drive>[
       new Drive(
-        'Hard Disk',
+        'My Computer',
         50, 200,
         128,
         <File>[
@@ -33,7 +33,7 @@ class Levels {
   static final Level TUTORIAL2 = new Level(
     <Drive>[
       new Drive(
-        'Hard Disk',
+        'My Computer',
         50, 200,
         128,
         <File>[
@@ -62,11 +62,13 @@ class Levels {
   static final Level TUTORIAL3 = new Level(
     <Drive>[
       new Drive(
-        'Hard Disk',
+        'My Computer',
         50, 200,
         128,
         <File>[
-          new File('videos.zip', FileType.ZIP, 121.4),
+          new ZipFile.withName('videos.zip', <File>[
+            new File('secret.mp4', FileType.TEXT, 121.4 / 0.3),
+          ]),
           new File('passwords.txt', FileType.TEXT, 2.1),
         ],
         <String>[
@@ -92,7 +94,7 @@ class Levels {
   static final Level ZIP1 = new Level(
     <Drive>[
       new Drive(
-        'Hard Disk',
+        'My Computer',
         50, 200,
         128,
         <File>[
@@ -129,7 +131,7 @@ class Levels {
   static final Level ZIP2 = new Level(
     <Drive>[
       new Drive(
-        'Hard Disk',
+        'My Computer',
         30, 80,
         128,
         <File>[
@@ -176,7 +178,7 @@ class Levels {
   static final Level ZIP3 = new Level(
     <Drive>[
       new Drive(
-        'Hard Disk',
+        'My Computer',
         30, 80,
         128,
         <File>[
@@ -213,7 +215,7 @@ class Levels {
   static final Level ZIP4 = new Level(
     <Drive>[
       new Drive(
-        'Hard Disk',
+        'My Computer',
         30, 80,
         128,
         <File>[
@@ -268,7 +270,7 @@ class Levels {
   static final Level BOMB = new Level(
     <Drive>[
       new Drive(
-        'Hard Disk',
+        'My Computer',
         50, 200,
         128,
         <File>[

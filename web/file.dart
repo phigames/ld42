@@ -31,11 +31,12 @@ class File extends Sprite {
     updateIcon();
   }
 
-  void highlight() {
+  void highlight(int color) {
     Shape highlight = new Shape()
       ..graphics.beginPath()
       ..graphics.rect(0, 0, 50, 50)
-      ..graphics.fillColor(0x88000000);
+      ..graphics.fillColor(color)
+      ..alpha = 0.7;
     addChild(highlight);
     stage.juggler.addTween(highlight, 0.7)
       ..animate.alpha.to(0)

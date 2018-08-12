@@ -35,6 +35,11 @@ Future<Null> main() async {
   resourceManager.addBitmapData('zip', 'res/zip.png');
   resourceManager.addBitmapData('stapler1', 'res/stapler1.png');
   resourceManager.addBitmapData('stapler2', 'res/stapler2.png');
+  resourceManager.addSound('click', 'res/click.ogg');
+  resourceManager.addSound('error', 'res/error.ogg');
+  resourceManager.addSound('zip', 'res/zip.ogg');
+  resourceManager.addSound('staple', 'res/staple.ogg');
+  resourceManager.addSound('clap', 'res/clap.ogg');
 
   await resourceManager.load();
 
@@ -56,6 +61,7 @@ Future<Null> main() async {
     ..height = 50;
   stage.addChild(levelText);
   stage.addChild(levels[currentLevel]);
+  levels[currentLevel].start();
   html.document.onKeyUp.listen(_onKeyPressed);
 }
 
@@ -68,6 +74,7 @@ void nextLevel() {
     levelText.text = 'Level ${currentLevel.toString()}';
     stage.addChild(levelText);
     stage.addChild(levels[currentLevel]);
+    levels[currentLevel].start();
   }
 }
 

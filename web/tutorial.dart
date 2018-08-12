@@ -91,6 +91,8 @@ class Tutorial extends Sprite {
       actionStrings.remove(action);
       balloon.visible = button.visible = true;
       this.callback = callback;
+      resourceManager.getSound('staple').play();
+      print(action);
     }
   }
 
@@ -99,11 +101,18 @@ class Tutorial extends Sprite {
     if (callback != null) {
       callback();
     }
+    resourceManager.getSound('click').play();
   }
 
   void toggle() {
-    if (balloon.visible) balloon.visible = button.visible = false;
-    else balloon.visible = button.visible = true;
+    if (balloon.visible) {
+      balloon.visible = button.visible = false;
+      resourceManager.getSound('click').play();
+    }
+    else {
+      balloon.visible = button.visible = true;
+      resourceManager.getSound('staple').play();
+    }
   }
 
 }
