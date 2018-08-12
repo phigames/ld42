@@ -98,8 +98,11 @@ class Level extends Sprite {
   void _stopFileDrag(File file) {
     bool moved = false;
     for (Drive d in drives) {
-      if (d != file.drive && file.hitTestObject(d)) {
+      if (file.hitTestObject(d)) {
         moved = d.moveHere(file);
+        if (moved) {
+          break;
+        }
       }
     }
     if (!moved) {
