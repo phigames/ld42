@@ -1,5 +1,11 @@
 part of ld42;
 
+enum Action {
+  BEGIN,
+  ZIP,
+  END,
+}
+
 class Tutorial extends Sprite {
 
   Map<Action, String> actionStrings;
@@ -8,22 +14,43 @@ class Tutorial extends Sprite {
   Sprite button;
   Function callback;
 
-  Tutorial({String begin, String end}) {
+  Tutorial({String begin, String zip, String end}) {
     actionStrings = new Map<Action, String>();
     if (begin != null) actionStrings[Action.BEGIN] = begin;
+    if (zip != null) actionStrings[Action.ZIP] = zip;
     if (end != null) actionStrings[Action.END] = end;
-    x = 500;
+    x = 480;
     y = 300;
-    stapler = new Sprite();
-    stapler.graphics.beginPath();
-    stapler.graphics.rect(0, 230, 100, 50);
-    stapler.graphics.fillColor(0xFFFF0000);
+    stapler = new Sprite()
+      ..x = 40
+      ..y = 200
+      ..mouseCursor = MouseCursor.POINTER;
+    Bitmap image = new Bitmap(resourceManager.getBitmapData('stapler2'))
+      ..width = 160
+      ..height = 100;
+    stapler.addChild(image);
+    stapler.onMouseOver.listen((_) {
+      image.bitmapData = resourceManager.getBitmapData('stapler1');
+      image.width = 160;
+      image.height = 100;
+    });
+    stapler.onMouseOut.listen((_) {
+      image.bitmapData = resourceManager.getBitmapData('stapler2');
+      image.width = 160;
+      image.height = 100;
+    });
     addChild(stapler);
     balloon = new Sprite();
     balloon.graphics.beginPath();
     balloon.graphics.rectRound(0, 0, 300, 200, 10, 10);
     balloon.graphics.fillColor(0xFFFFFF88);
-    balloon.graphics.strokeColor(0xFF000000);
+    balloon.graphics.strokeColor(0xFF000000, 2);
+    balloon.graphics.beginPath();
+    balloon.graphics.moveTo(25, 195);
+    balloon.graphics.lineTo(50, 220);
+    balloon.graphics.lineTo(50, 195);
+    balloon.graphics.fillColor(0xFFFFFF88);
+    balloon.graphics.strokeColor(0xFF000000, 2);
     addChild(balloon);
     button = new Sprite();
     button.x = 200;
@@ -40,16 +67,19 @@ class Tutorial extends Sprite {
         ..height = 20
         ..mouseEnabled = false
     );
-    button.onTouchTap.listen((_) => hide());
-    button.onMouseClick.listen((_) => hide());
+    button.onTouchTap.listen((_) => ok());
+    button.onMouseClick.listen((_) => ok());
+    stapler.onTouchTap.listen((_) => toggle());
+    stapler.onMouseClick.listen((_) => toggle());
     button.mouseCursor = MouseCursor.POINTER;
     addChild(button);
-    visible = false;
+    balloon.visible = button.visible = false;
   }
 
   void handleAction(Action action, [Function callback]) {
     if (actionStrings.containsKey(action)) {
-      hide();
+      balloon.removeChildren();
+      //ok();
       balloon.addChild(
         new TextField(actionStrings[action], new TextFormat(FONT, 15, 0xFF000000))
           ..x = 10
@@ -59,22 +89,21 @@ class Tutorial extends Sprite {
           ..wordWrap = true
       );
       actionStrings.remove(action);
-      visible = true;
+      balloon.visible = button.visible = true;
       this.callback = callback;
     }
   }
 
-  void hide() {
-    balloon.removeChildren();
-    visible = false;
+  void ok() {
+    balloon.visible = button.visible = false;
     if (callback != null) {
       callback();
     }
   }
 
-}
+  void toggle() {
+    if (balloon.visible) balloon.visible = button.visible = false;
+    else balloon.visible = button.visible = true;
+  }
 
-enum Action {
-  BEGIN,
-  END,
 }

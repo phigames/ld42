@@ -69,14 +69,21 @@ class ZipFile extends File {
 
   static const Map<FileType, num> COMPRESSION = <FileType, num>{
     FileType.TEXT: 0.3,
-    FileType.IMAGE: 0.9,
-    FileType.ZIP: 0,
+    FileType.IMAGE: 0.8,
+    FileType.ZIP: 1,
   };
 
   List<File> files;
   num originalSize;
 
-  ZipFile(int number, this.files) : super('zip' + number.toString(), FileType.ZIP, calculateSize(files)) {
+  ZipFile(int number, this.files) : super('archive${number.toString()}.zip', FileType.ZIP, calculateSize(files)) {
+    originalSize = 0;
+    for (File f in files) {
+      originalSize += f.size;
+    }
+  }
+
+  ZipFile.withName(String name, this.files) : super(name, FileType.ZIP, calculateSize(files)) {
     originalSize = 0;
     for (File f in files) {
       originalSize += f.size;

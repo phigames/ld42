@@ -104,6 +104,7 @@ class Level extends Sprite {
     }
     if (!moved) {
       file.drive.update();
+      print('cannot move');
     } else {
       checkLevelOver();
     }
@@ -119,6 +120,7 @@ class Level extends Sprite {
   void _stopDriveDrag(Drive drive) {
     drive.dragging = false;
     drive.stopDrag();
+    drive.update(redraw: false);
   }
 
   void _toggleFileSelection(File file) {
@@ -153,6 +155,7 @@ class Level extends Sprite {
           for (File f in zip.files) {
             addFile(zip.drive, f, false);
           }
+          checkLevelOver();
         }
       }
       // zip multiple or single regular files
@@ -162,6 +165,7 @@ class Level extends Sprite {
         }
         ZipFile zip = new ZipFile(zipNumber++, selectedFiles);
         addFile(selectionDrive, zip, true);
+        tutorial.handleAction(Action.ZIP);
       }
       deselectAll();
     }
