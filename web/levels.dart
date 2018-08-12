@@ -27,7 +27,7 @@ class Levels {
     ],
     new Tutorial(
       begin: 'Hi! I\'m Stapley, your office assistant.\nIt looks like you\'re trying to move this picture of cute kittens to a flash drive. You should probably use drag & drop to do that.',
-      end: 'Great job! I knew you could do it.\nI bet now you\'d like to see the picture of the kittens. Unfortunately, we don\'t have time for that right now. Let\'s move some more files instead.')
+      end: 'Great job! I knew you could do it.\nI bet now you\'d like to see the picture of the kittens. Unfortunately, we won\'t have time for that right now. Let\'s move some more files instead.')
   );
 
   static final Level TUTORIAL2 = new Level(
@@ -169,7 +169,7 @@ class Levels {
       )
     ],
     new Tutorial(
-      begin: 'With all the buzz about your kitten picture, Dan want\'s to see it too! How can you give it to him without losing all the precious fan fiction?',
+      begin: 'With all the buzz about your kitten picture, Dan wants to see it too! How can you give it to him without losing all the precious fan fiction?',
       end: 'Dan is impressed! Who would have thought a picture of kittens could be so cute.')
   );
 
@@ -218,32 +218,51 @@ class Levels {
         128,
         <File>[
           new ZipFile.withName('videos.zip', <File>[
-            new File('secret.mp4', FileType.TEXT, 121.4 / 0.3),
+            new File('secret.mp4', FileType.TEXT, 120.3 / 0.3),
           ]),
-          new File('harrypotter.txt', FileType.TEXT, 2.4),
+          new File('wordart.dot', FileType.IMAGE, 3.2),
           new File('minions.txt', FileType.TEXT, 1.8),
           new File('terminator.txt', FileType.TEXT, 1.5),
         ],
         <String>[
-          'minions.txt',
-          'terminator.txt',
-          'wordart.dot',
+          'kittens.jpg',
+          'kittens1.jpg',
+          'kittens2.jpg',
+          'kittens3.jpg',
+          'kittens4.jpg',
+          'kittens5.jpg',
         ]
       ),
       new Drive(
         'Dan\'s USB Drive',
         100, 330,
-        8,
+        32,
         <File>[
           new File('kittens.jpg', FileType.IMAGE, 5.2),
+          new File('kittens1.jpg', FileType.IMAGE, 2.4),
+          new File('kittens2.jpg', FileType.IMAGE, 2.4),
+          new File('kittens3.jpg', FileType.IMAGE, 2.4),
+          new File('kittens4.jpg', FileType.IMAGE, 2.4),
+          new File('kittens5.jpg', FileType.IMAGE, 2.4),
+        ],
+        <String>[
+        ]
+      ),
+      new Drive(
+        'External HD',
+        400, 60,
+        128,
+        <File>[
+          new File('taxes.doc', FileType.TEXT, 52.4),
+          new File('important.doc', FileType.TEXT, 41.9),
         ],
         <String>[
         ]
       )
     ],
     new Tutorial(
-      begin: 'Dan\'s friend\'s second cousin\'s girlfriend has a photocopy machine at work, and she made some copies of your kitten picture!',
-      end: '')
+      begin: 'Dan\'s friend\'s second cousin\'s girlfriend has a photocopy machine at work, and she made some copies of your kitten picture! Can you squeeze all of them on your computer uncompressed?',
+      end: 'Awesome! Kitten pictures for everyone!')
   );
 
   static final Level BOMB = new Level(
@@ -280,7 +299,7 @@ class Levels {
       )
     ],
     new Tutorial(
-      begin: 'What\'s this? Did Mike send you some more of those videos?',
+      begin: 'What\'s this? Did Mike send you some more of those interesting videos?',
       end: 'Oh no! It\'s a zip bomb! Your computer is completely destroyed.\nEither this is the end of the game or the developer just ran out of ideas for levels. Probably the latter.\n\n    Thank you for playing! <3')
   );
 

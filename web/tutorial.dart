@@ -42,7 +42,7 @@ class Tutorial extends Sprite {
     addChild(stapler);
     balloon = new Sprite();
     balloon.graphics.beginPath();
-    balloon.graphics.rectRound(0, 0, 300, 200, 10, 10);
+    balloon.graphics.rectRound(0, 0, 300, 200, 5, 5);
     balloon.graphics.fillColor(0xFFFFFF88);
     balloon.graphics.strokeColor(0xFF000000, 2);
     balloon.graphics.beginPath();
@@ -58,7 +58,7 @@ class Tutorial extends Sprite {
     button.graphics.beginPath();
     button.graphics.rect(0, 0, 100, 30);
     button.graphics.fillColor(0xFFFFFFAA);
-    button.graphics.strokeColor(0xFF000000);
+    button.graphics.strokeColor(0xFF000000, 2);
     button.addChild(
       new TextField('OK', new TextFormat(FONT, 15, 0xFF000000, align: 'center'))
         ..x = 5

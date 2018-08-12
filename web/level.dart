@@ -162,7 +162,7 @@ class Level extends Sprite {
         }
       }
       // zip multiple or single regular files
-      else {
+      else if (selectedFiles.length > 0) {
         for (File f in selectedFiles) {
           removeFile(f);
         }

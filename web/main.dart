@@ -39,13 +39,13 @@ Future<Null> main() async {
   await resourceManager.load();
 
   levels = <Level>[
-    Levels.ZIP4,
     Levels.TUTORIAL1,
     Levels.TUTORIAL2,
     Levels.TUTORIAL3,
     Levels.ZIP1,
     Levels.ZIP2,
     Levels.ZIP3,
+    Levels.ZIP4,
     Levels.BOMB,
   ];
   currentLevel = 0;
