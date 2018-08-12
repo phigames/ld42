@@ -35,6 +35,7 @@ Future<Null> main() async {
   resourceManager.addBitmapData('zip', 'res/zip.png');
   resourceManager.addBitmapData('stapler1', 'res/stapler1.png');
   resourceManager.addBitmapData('stapler2', 'res/stapler2.png');
+  resourceManager.addBitmapData('crack', 'res/crack.png');
   resourceManager.addSound('click', 'res/click.ogg');
   resourceManager.addSound('error', 'res/error.ogg');
   resourceManager.addSound('zip', 'res/zip.ogg');

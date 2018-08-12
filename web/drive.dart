@@ -71,6 +71,14 @@ class Drive extends Sprite {
     return true;
   }
 
+  void crack() {
+    addChild(
+      new Bitmap(resourceManager.getBitmapData('crack'))
+        ..width = area.width
+        ..height = area.height
+    );
+  }
+
   void update({bool sort = false, bool redraw = true}) {
     if (sort) {
       //files.sort((f1, f2) => f1.name.compareTo(f2.name));

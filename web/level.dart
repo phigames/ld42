@@ -174,6 +174,9 @@ class Level extends Sprite {
             f.highlight(0xFF4444FF);
           }
           checkLevelOver();
+          if (zip.bomb) {
+            zip.drive.crack();
+          }
           resourceManager.getSound('zip').play();
         }
       }

@@ -299,7 +299,7 @@ class Levels {
             new File('boom5.zip', FileType.TEXT, 16),
             new File('boom6.zip', FileType.TEXT, 16),
             new File('boom7.zip', FileType.TEXT, 16),
-          ]),
+          ], true),
         ],
         <String>[
         ]

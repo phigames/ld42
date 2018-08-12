@@ -87,15 +87,16 @@ class ZipFile extends File {
 
   List<File> files;
   num originalSize;
+  bool bomb;
 
-  ZipFile(int number, this.files) : super('archive${number.toString()}.zip', FileType.ZIP, calculateSize(files)) {
+  ZipFile(int number, this.files, [this.bomb = false]) : super('archive${number.toString()}.zip', FileType.ZIP, calculateSize(files)) {
     originalSize = 0;
     for (File f in files) {
       originalSize += f.size;
     }
   }
 
-  ZipFile.withName(String name, this.files) : super(name, FileType.ZIP, calculateSize(files)) {
+  ZipFile.withName(String name, this.files, [this.bomb = false]) : super(name, FileType.ZIP, calculateSize(files)) {
     originalSize = 0;
     for (File f in files) {
       originalSize += f.size;
