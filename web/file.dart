@@ -31,6 +31,17 @@ class File extends Sprite {
     updateIcon();
   }
 
+  void highlight() {
+    Shape highlight = new Shape()
+      ..graphics.beginPath()
+      ..graphics.rect(0, 0, 50, 50)
+      ..graphics.fillColor(0x88000000);
+    addChild(highlight);
+    stage.juggler.addTween(highlight, 0.7)
+      ..animate.alpha.to(0)
+      ..onComplete = () => removeChild(highlight);
+  }
+
   void updateIcon() {
     if (type == FileType.TEXT) {
       icon.bitmapData = resourceManager.getBitmapData('text');

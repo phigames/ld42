@@ -273,6 +273,11 @@ class Levels {
         128,
         <File>[
           new File('kittens.jpg', FileType.IMAGE, 5.2),
+          new File('kittens1.jpg', FileType.IMAGE, 2.4),
+          new File('kittens2.jpg', FileType.IMAGE, 2.4),
+          new File('kittens3.jpg', FileType.IMAGE, 2.4),
+          new File('kittens4.jpg', FileType.IMAGE, 2.4),
+          new File('kittens5.jpg', FileType.IMAGE, 2.4),
         ],
         <String>[
           'boom0.zip',
@@ -284,14 +289,14 @@ class Levels {
         48,
         <File>[
           new ZipFile.withName('unzip_me.zip', <File>[
-            new File('boom0.zip', FileType.ZIP, 16),
-            new File('boom1.zip', FileType.ZIP, 16),
-            new File('boom2.zip', FileType.ZIP, 16),
-            new File('boom3.zip', FileType.ZIP, 16),
-            new File('boom4.zip', FileType.ZIP, 16),
-            new File('boom5.zip', FileType.ZIP, 16),
-            new File('boom6.zip', FileType.ZIP, 16),
-            new File('boom7.zip', FileType.ZIP, 16),
+            new File('boom0.zip', FileType.TEXT, 16),
+            new File('boom1.zip', FileType.TEXT, 16),
+            new File('boom2.zip', FileType.TEXT, 16),
+            new File('boom3.zip', FileType.TEXT, 16),
+            new File('boom4.zip', FileType.TEXT, 16),
+            new File('boom5.zip', FileType.TEXT, 16),
+            new File('boom6.zip', FileType.TEXT, 16),
+            new File('boom7.zip', FileType.TEXT, 16),
           ]),
         ],
         <String>[

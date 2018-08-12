@@ -76,5 +76,5 @@ void _onKeyPressed(html.KeyboardEvent event) {
 }
 
 void gameOver() {
-  print('game over');
+  html.window.location.assign('https://redditp.com/r/kittengifs/');
 }

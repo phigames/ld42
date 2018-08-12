@@ -157,6 +157,7 @@ class Level extends Sprite {
           removeFile(zip);
           for (File f in zip.files) {
             addFile(zip.drive, f, false);
+            f.highlight();
           }
           checkLevelOver();
         }
@@ -168,6 +169,7 @@ class Level extends Sprite {
         }
         ZipFile zip = new ZipFile(zipNumber++, selectedFiles);
         addFile(selectionDrive, zip, true);
+        zip.highlight();
         tutorial.handleAction(Action.ZIP);
       }
       deselectAll();
