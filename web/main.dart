@@ -44,6 +44,8 @@ Future<Null> main() async {
 
   await resourceManager.load();
 
+  Levels.load();
+
   levels = <Level>[
     Levels.TUTORIAL1,
     Levels.TUTORIAL2,
