@@ -62,6 +62,9 @@ class Drive extends Sprite {
         if (f.name == fn) {
           contained = true;
           break;
+        } else if (f is ZipFile && f.containsFile(fn)) {
+          contained = true;
+          break;
         }
       }
       if (!contained) {

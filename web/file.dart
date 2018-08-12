@@ -111,6 +111,17 @@ class ZipFile extends File {
     return size;
   }
 
+  bool containsFile(String name) {
+    for (File f in files) {
+      if (f.name == name) {
+        return true;
+      } else if (f is ZipFile &&f.containsFile(name)) {
+        return true;
+      }
+    }
+    return false;
+  }
+
   @override
   String toString() {
     return 'ZIPFILE: ' + name + ' (' + files.toString() + ')';

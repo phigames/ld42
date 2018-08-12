@@ -2,9 +2,9 @@ part of ld42;
 
 String sizeString(num size) {
   if (size < 1024) {
-    return '${size.toStringAsPrecision(3)}kB';
+    return '${size.toStringAsFixed(1)}kB';
   } else {
-    return '${(size/1024).toStringAsPrecision(3)}MB';
+    return '${(size/1024).toStringAsFixed(1)}MB';
   }
 }
 
@@ -163,7 +163,7 @@ class Level extends Sprite {
       }
       // unzip single zip file
       if (selectedFiles.length == 1 && selectedFiles[0] is ZipFile) {
-        ZipFile zip = selectedFiles[0] as ZipFile;
+        ZipFile zip = selectedFiles[0];
         if (zip.drive.used - zip.size + zip.originalSize > zip.drive.size) {
           zip.highlight(0xFFAA4444);
           resourceManager.getSound('error').play();

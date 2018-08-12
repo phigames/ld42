@@ -92,7 +92,6 @@ class Tutorial extends Sprite {
       balloon.visible = button.visible = true;
       this.callback = callback;
       resourceManager.getSound('staple').play();
-      print(action);
     }
   }
 
